@@ -17,6 +17,15 @@ router.post("/", async (req, res) => {
         res.status(200).send(locationResponse);
         return;
     }
+
+    await new Promise<void>((resolve) => {
+        const delay = Math.random() * 1000 * 3; // max 3 seconds
+        console.log("Reponse delay:", delay);
+        setTimeout(() => {
+            resolve();
+        }, delay);
+    });
+
     res.status(200).send("OK");
 });
 api.use(router);

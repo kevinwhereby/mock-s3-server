@@ -32,6 +32,27 @@ router.post("/", async (req, res) => {
 
     res.status(200).send("OK");
 });
+
+router.put("/", async (req, res) => {
+    console.log("PUT", req.url);
+    const url = new URL(process.env.HOSTNAME + req.url);
+    if (url.searchParams.has("location")) {
+        res.status(200).send(locationResponse);
+        return;
+    }
+
+    console.log("Simulating write to", url);
+    console.log(req.body);
+    await new Promise<void>((resolve) => {
+        const delay = Math.random() * 1000 * 3; // max 3 seconds
+        console.log("Reponse delay:", delay);
+        setTimeout(() => {
+            resolve();
+        }, delay);
+    });
+
+    res.status(200).send("OK");
+});
 api.use(router);
 api.listen(3003);
 console.log("listening...");

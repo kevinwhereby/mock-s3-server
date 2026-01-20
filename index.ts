@@ -12,7 +12,7 @@ router.get("/", (_, res) => {
     res.end();
 });
 router.post("/", async (req, res) => {
-    const url = new URL(req.url);
+    const url = new URL(process.env.HOSTNAME + req.url);
     if (url.searchParams.has("location")) {
         res.status(200).send(locationResponse);
         return;

@@ -12,7 +12,7 @@ router.get("/", (req, res) => {
     res.status(200);
     res.end();
 });
-router.post("/", async (req, res) => {
+router.post("/*", async (req, res) => {
     console.log("POST", req.url);
     const url = new URL(process.env.HOSTNAME + req.url);
     if (url.searchParams.has("location")) {
@@ -33,7 +33,7 @@ router.post("/", async (req, res) => {
     res.status(200).send("OK");
 });
 
-router.put("/", async (req, res) => {
+router.put("/*", async (req, res) => {
     console.log("PUT", req.url);
     const url = new URL(process.env.HOSTNAME + req.url);
     if (url.searchParams.has("location")) {
